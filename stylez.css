@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0b0c10;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-viewport {
+    position: relative;
+    width: 1024px;
+    height: 576px;
+    border: 4px solid #1f2833;
+    box-shadow: 0px 0px 30px rgba(102, 252, 241, 0.2);
+}
+
+#game-canvas {
+    background-color: #1c1c22;
+    display: block;
+}
+
+#hud-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.health-bar-wrapper {
+    position: relative;
+    width: 40%;
+    height: 30px;
+    background-color: #451212;
+    border: 3px solid #ff4d4d;
+    overflow: hidden;
+}
+
+.health-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #ff0055, #ffcc00);
+    transition: width 0.1s ease-out;
+}
+
+#hud-container > .health-bar-wrapper:last-of-type .health-fill {
+    right: 0;
+}
+
+#match-timer {
+    width: 60px;
+    height: 60px;
+    background-color: #0b0c10;
+    border: 3px solid #66fcf1;
+    color: #66fcf1;
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(102, 252, 241, 0.5);
+}
+
+/* ===================================================
+   FIXED: BULLETPROOF GAME OVER CENTERING ARCHITECTURE
+   =================================================== */
+#game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 12, 16, 0.85); /* Smooth backing tint */
+    
+    /* Centralizing layout array matrices */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    
+    /* State changes: Invisible by default */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 20;
+}
+
+/* This class activates everything perfectly through script files */
+#game-over-screen.active {
+    opacity: 1;
+    pointer-events: auto; /* Re-enables clicking when match finishes */
+}
+/* This class activates everything for the user who wins the game */
+#winner-text {
+    font-size: 72px;
+    font-weight: bold;
+    color: #66fcf1;
+    text-shadow: 0px 0px 25px rgba(102, 252, 241, 0.8), 0px 0px 50px #ff0055;
+    letter-spacing: 2px;
+}
+
+#restart-btn {
+    background-color: #1f2833;
+    border: 3px solid #66fcf1;
+    color: #66fcf1;
+    padding: 15px 40px;
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+#restart-btn:hover {
+    background-color: #66fcf1;
+    color: #0b0c10;
+    box-shadow: 0px 0px 25px #66fcf1;
+    transform: scale(1.05); /* Slight bounce animation on hover */
+}
